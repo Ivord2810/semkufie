@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senkufie Music Showroom</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================================== */
+        /* CSS STYLES (Normally in style.css)   */
+        /* ==================================== */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Dark charcoal background */
+            color: #F8F8F8; /* Light off-white text */
+            overflow-x: hidden;
+        }
+        .page-content {
+            display: none;
+            min-height: calc(100vh - 80px); /* Adjust for header height */
+            padding-top: 80px;
+        }
+        .cinzel-font {
+            font-family: 'Cinzel', serif;
+        }
+        .active-link {
+            border-bottom: 2px solid #FFD700; /* Gold accent */
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFD700, #C9A800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        /* Hide scrollbar for carousel and top nav on most browsers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm shadow-lg">
+        <nav class="container mx-auto flex items-center justify-between p-4 px-6 md:px-12">
+            <a href="#" class="text-3xl font-bold cinzel-font text-white tracking-widest">
+                SENKUFIE
+            </a>
+            <div class="space-x-8">
+                <a href="#" class="nav-link text-white hover:text-yellow-500 transition-colors duration-300 active-link" onclick="showPage('home-page', this)">Home</a>
+                <a href="#" class="nav-link text-white hover:text-yellow-500 transition-colors duration-300" onclick="showPage('shop-page', this)">Shop</a>
+                <a href="#" class="nav-link text-white hover:text-yellow-500 transition-colors duration-300" onclick="showPage('contact-page', this)">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Containers -->
+
+    <!-- ==================================== -->
+    <!-- 1. HOME PAGE CONTENT -->
+    <!-- ==================================== -->
+    <div id="home-page" class="page-content block">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center bg-[url('https://t3.ftcdn.net/jpg/00/10/11/90/360_F_10119006_JjlCbu7xGu93URdQRU7cxbXtqMbDDGEN.jpg')] bg-cover bg-center bg-no-repeat relative">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative z-10 text-center px-6 fade-in">
+                <h1 class="text-6xl md:text-8xl font-black cinzel-font tracking-tighter leading-none gold-gradient mb-4 drop-shadow-xl">
+                    THE STAGE IS YOURS
+                </h1>
+                <p class="text-xl md:text-3xl font-light text-gray-200 max-w-2xl mx-auto mb-8">
+                    Dealers in Top Brands of Musical Instruments and Accessories.
+                </p>
+                <a href="#" onclick="showPage('shop-page', document.querySelector('.nav-link:nth-child(2)'))" class="inline-block px-8 py-4 text-lg font-bold text-white bg-yellow-600 rounded-full shadow-lg hover:bg-white hover:text-black transition-all duration-300 hover-lift">
+                    EXPLORE THE COLLECTION
+                </a>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="container mx-auto py-24 px-6 md:px-12">
+            <div class="text-center fade-in">
+                <h2 class="text-5xl font-bold cinzel-font gold-gradient mb-6">Our Legacy</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Since 1985, Senkufie Music has been dedicated to empowering musicians of all levels with the finest instruments and gear. We believe that music is a universal language, and our mission is to provide the tools that allow every artist to speak their truth. Our curated collection features top brands known for their craftsmanship, tone, and durability.
+                </p>
+            </div>
+            <div class="mt-16 grid md:grid-cols-3 gap-8 text-center fade-in">
+                <div class="bg-gray-900 rounded-2xl p-8 shadow-xl hover-lift">
+                    <h3 class="text-3xl font-semibold gold-gradient mb-4">Quality</h3>
+                    <p class="text-gray-400">Hand-selected instruments and accessories for superior sound.</p>
+                </div>
+                <div class="bg-gray-900 rounded-2xl p-8 shadow-xl hover-lift">
+                    <h3 class="text-3xl font-semibold gold-gradient mb-4">Expertise</h3>
+                    <p class="text-gray-400">Our team of passionate musicians is here to guide you.</p>
+                </div>
+                <div class="bg-gray-900 rounded-2xl p-8 shadow-xl hover-lift">
+                    <h3 class="text-3xl font-semibold gold-gradient mb-4">Community</h3>
+                    <p class="text-gray-400">Join a family of artists dedicated to the craft of music.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Instruments Carousel -->
+        <section class="container mx-auto py-24 px-6 md:px-12 fade-in">
+            <h2 class="text-5xl font-bold text-center cinzel-font gold-gradient mb-12">Featured Instruments</h2>
+            <div class="relative">
+                <div id="carousel" class="flex overflow-x-auto no-scrollbar space-x-6 pb-4 scroll-smooth">
+                    <!-- Carousel Item 1 -->
+                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
+                        <img src="https://kraftmusic.com/cdn/shop/files/YAM-MONTAGEM8X_reartopleft.jpg?v=1696873027&width=3000" alt="Yamaha Montage" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <h4 class="text-xl font-bold text-white mb-2">Yamaha Montage M8x</h4>
+                        <p class="text-sm text-gray-300 mb-4">The centerpiece of any stage, premium voices and professional feel.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold gold-gradient">GHS 60,000</span>
+                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
+                        </div>
+                    </div>
+                    <!-- Carousel Item 2 -->
+                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
+                        <img src="https://www.sweelee.com.sg/cdn/shop/products/N10-10641_1563521017601_1200x1200.jpg?v=1569334145" alt="Nord Stage 4" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <h4 class="text-xl font-bold text-white mb-2">Nord Stage 4</h4>
+                        <p class="text-sm text-gray-300 mb-4">A timeless blend of tone, aesthetics anf function.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold gold-gradient">GHS 75,000</span>
+                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
+                        </div>
+                    </div>
+                    <!-- Carousel Item 3 -->
+                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
+                        <img src="https://media.musicarts.com/is/image/MMGS7/L52976000003000-00-2000x2000.jpg" alt="Marcus Miller M2 5-string Bass Guitar" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <h4 class="text-xl font-bold text-white mb-2">Marcus Miller M2</h4>
+                        <p class="text-sm text-gray-300 mb-4">Feel the rhythm with this powerful bass.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold gold-gradient">GHS 15,000</span>
+                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
+                        </div>
+                    </div>
+                    <!-- Carousel Item 4 -->
+                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
+                        <img src="https://sweet-muzic.com/wp-content/uploads/2024/08/Export-717.jpg" alt="Pearl Export 5" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <h4 class="text-xl font-bold text-white mb-2">Pearl Export 5</h4>
+                        <p class="text-sm text-gray-300 mb-4">Powerful drum kit for every professional taste and need.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold gold-gradient">GHS 18,000</span>
+                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
+                        </div>
+                    </div>
+                     <!-- Carousel Item 5 -->
+                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
+                        <img src="https://m.media-amazon.com/images/I/61SaQs6k60L._UF1000,1000_QL80_.jpg" alt="Behringer x32" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <h4 class="text-xl font-bold text-white mb-2">Behringer x32 </h4>
+                        <p class="text-sm text-gray-300 mb-4">The command center for your sound.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold gold-gradient">GHS 45,000</span>
+                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Navigation -->
+                <button onclick="scrollCarousel(-1)" class="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-800 p-2 rounded-full text-yellow-500 shadow-xl opacity-75 hover:opacity-100 transition-opacity">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button onclick="scrollCarousel(1)" class="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-800 p-2 rounded-full text-yellow-500 shadow-xl opacity-75 hover:opacity-100 transition-opacity">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================================== -->
+    <!-- 2. SHOP PAGE CONTENT -->
+    <!-- ==================================== -->
+    <div id="shop-page" class="page-content">
+        <section class="container mx-auto py-16 px-6 md:px-12 fade-in">
+            <h2 class="text-5xl font-bold text-center cinzel-font gold-gradient mb-12">Our Instruments</h2>
+            
+            <!-- TOP FILTER BAR: Categories Navigation Only -->
+            <div class="bg-gray-900 rounded-2xl p-6 mb-12 shadow-2xl">
+                <!-- Category Navigation -->
+                <nav>
+                    <h3 class="text-lg font-bold text-yellow-500 mb-2">Jump to Category</h3>
+                    <div class="flex overflow-x-auto no-scrollbar pb-2 space-x-3">
+                        <a href="#lead-guitars-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Lead Guitars</a>
+                        <a href="#bass-guitars-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Bass Guitars</a>
+                        <a href="#keyboards-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Keyboards</a>
+                        <a href="#drums-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Drums</a>
+                        <a href="#combos-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Combos</a>
+                        <a href="#amplifiers-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Amplifiers</a>
+                        <a href="#monitors-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Monitors</a>
+                        <a href="#line-arrays-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Line Arrays</a>
+                        <a href="#mixers-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Mixers</a>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- Main Product Content Area (full width) -->
+            <div id="product-list" class="w-full">
+
+                <!-- Lead Guitars -->
+                <div id="lead-guitars-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Lead Guitars</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Bass Guitars -->
+                <div id="bass-guitars-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Bass Guitars</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Keyboards -->
+                <div id="keyboards-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Keyboards</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Drums -->
+                <div id="drums-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Drums</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Combos -->
+                <div id="combos-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Combos</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Amplifiers -->
+                <div id="amplifiers-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Amplifiers</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Monitors -->
+                <div id="monitors-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Monitors (Active & Passive)</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Line Arrays -->
+                <div id="line-arrays-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Line Arrays</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+
+                <!-- Mixers -->
+                <div id="mixers-section" class="mb-16 product-group pt-4 -mt-4">
+                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Mixers (Digital & Analog)</h3>
+                    <!-- Product cards will be inserted here by JavaScript -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Content generated by renderProducts() -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================================== -->
+    <!-- 3. CONTACT PAGE CONTENT -->
+    <!-- ==================================== -->
+    <div id="contact-page" class="page-content">
+        <section class="container mx-auto py-16 px-6 md:px-12 fade-in">
+            <h2 class="text-5xl font-bold text-center cinzel-font gold-gradient mb-12">Contact Us</h2>
+            <div class="flex flex-col lg:flex-row items-center lg:space-x-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-900 rounded-2xl p-8 shadow-xl w-full lg:w-1/2">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-300 font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-300 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-300 font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 font-bold text-black bg-yellow-600 rounded-full shadow-lg hover:bg-white hover:text-black transition-colors duration-300 hover-lift">Send Message</button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-center hidden"></div>
+                </div>
+                <!-- Contact Info -->
+                <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-3xl text-yellow-500">&#x1F4CD;</span>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Our Address</h4>
+                                <p class="text-gray-300">Afariwaa Junction, Tema</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-3xl text-yellow-500">&#x260E;</span>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Call Us</h4>
+                                <p class="text-gray-300">0541096002 / 0261333958</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-3xl text-yellow-500">&#x2709;</span>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Email Us</h4>
+                                <p class="text-gray-300">info@senkufiemusic.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- ==================================== -->
+    <!-- 4. ADMIN PRODUCT ENTRY PAGE CONTENT -->
+    <!-- ==================================== -->
+    <div id="admin-page" class="page-content">
+        <section class="container mx-auto py-16 px-6 md:px-12 fade-in">
+            <h2 class="text-5xl font-bold text-center cinzel-font text-red-500 mb-4">Admin Dashboard</h2>
+            <p class="text-center text-gray-400 mb-12">Product Inventory Management</p>
+            
+            <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl max-w-3xl mx-auto">
+                <h3 class="text-3xl font-semibold text-yellow-500 mb-6">Add New Product</h3>
+                <form id="product-entry-form" onsubmit="handleAddProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Row 1: ID and Name -->
+                    <div class="col-span-1">
+                        <label for="product-id" class="block text-gray-300 font-semibold mb-1 text-sm">Product ID (Unique, e.g., lg4, kb5)</label>
+                        <input type="text" id="product-id" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    <div class="col-span-1">
+                        <label for="product-name" class="block text-gray-300 font-semibold mb-1 text-sm">Product Name</label>
+                        <input type="text" id="product-name" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    
+                    <!-- Row 2: Category and Price -->
+                    <div class="col-span-1">
+                        <label for="product-category" class="block text-gray-300 font-semibold mb-1 text-sm">Category</label>
+                        <select id="product-category" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                            <option value="" disabled selected>Select a category...</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="col-span-1">
+                        <label for="product-price" class="block text-gray-300 font-semibold mb-1 text-sm">Price (e.g., $1,299 or GHS 5,000)</label>
+                        <input type="text" id="product-price" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+
+                    <!-- Row 3: Description and Image URL (Updated) -->
+                    <div class="col-span-full">
+                        <label for="product-description" class="block text-gray-300 font-semibold mb-1 text-sm">Description</label>
+                        <textarea id="product-description" rows="3" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                    </div>
+                    <div class="col-span-full">
+                        <label for="product-image-url" class="block text-gray-300 font-semibold mb-1 text-sm">Image Source Link (URL)</label>
+                        <input type="url" id="product-image-url" placeholder="https://example.com/guitar-image.jpg" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="col-span-full pt-6">
+                        <button type="submit" class="w-full px-6 py-3 text-lg font-bold text-black bg-green-500 rounded-full shadow-lg hover:bg-green-400 transition-colors duration-300 hover-lift">
+                            Add Product to Inventory
+                        </button>
+                    </div>
+                </form>
+                <div id="product-form-message" class="mt-6 text-center hidden p-3 rounded-lg font-medium"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-950 text-gray-400 p-8 mt-24">
+        <div class="container mx-auto text-center space-y-2">
+            <h4 class="text-xl font-bold cinzel-font text-white">Senkufie Music</h4>
+            <p>Afariwaa Junction, Tema | 0541096002</p>
+            <p class="text-sm">
+                &copy; 2024 Senkufie Music. All rights reserved. 
+                <span class="mx-2 text-gray-600">|</span> 
+                <!-- Hidden Admin Link: This is how the admin page is connected -->
+                <a href="#" class="text-yellow-600 hover:text-white transition-colors" onclick="showPage('admin-page', null)">Admin Login</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==================================== */
+        /* JAVASCRIPT LOGIC (Normally in script.js) */
+        /* ==================================== */
+
+        // Offset to account for the fixed header height (80px + padding). 
+        const HEADER_OFFSET = 96; 
+
+        // --- EFFICIENT PRODUCT MANAGEMENT START ---
+
+        // 1. DATA DEFINITION: Central array holding all product objects.
+        // NOTE: 'imagePlaceholder' has been updated to 'imageURL' to store the direct link.
+        let productData = [
+            // Lead Guitars
+            { id: 'lg1', category: 'lead-guitars-section', name: 'Majestic V Electric', description: 'A timeless blend of tone and aesthetics.', price: 'GHS 5,200', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Electric+Guitar' },
+            { id: 'lg2', category: 'lead-guitars-section', name: 'Acoustic Dreamer', description: 'Rich, resonant sounds for the soulful performer.', price: 'GHS 3,850', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Acoustic+Guitar' },
+            // Bass Guitars
+            { id: 'bg1', category: 'bass-guitars-section', name: 'Rumble Bass V', description: 'Feel the rhythm with this powerful bass.', price: 'GHS 4,100', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Bass+Guitar' },
+            // Keyboards
+            { id: 'kb1', category: 'keyboards-section', name: 'Grand Maestro', description: 'The centerpiece of any stage, crafted for perfection.', price: 'GHS 12,000', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Grand+Piano' },
+            { id: 'kb2', category: 'keyboards-section', name: 'Starlight Synthesizer', description: 'Endless soundscapes at your fingertips.', price: 'GHS 8,500', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Digital+Keyboard' },
+            // Drums
+            { id: 'dr1', category: 'drums-section', name: 'The Rhythmist Kit', description: 'A powerful acoustic kit for any genre.', price: 'GHS 7,800', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Acoustic+Drum+Set' },
+            // Combos (Amplifier & Cabinet combos)
+            { id: 'cb1', category: 'combos-section', name: 'Classic Combo Amp', description: 'All-in-one powerful and portable amplifier.', price: 'GHS 2,650', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Guitar+Amp+Combo' },
+            // Amplifiers (Heads & Cabinets)
+            { id: 'amp1', category: 'amplifiers-section', name: 'The Sonic Titan', description: 'Unleash powerful tone with this head amplifier.', price: 'GHS 5,100', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Head+Amplifier' },
+            // Monitors (Studio Monitors/Wedges)
+            { id: 'mon1', category: 'monitors-section', name: 'Clarity Studio Monitors', description: 'Hear every detail with these professional studio monitors.', price: 'GHS 1,950', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Studio+Monitors' },
+            // Line Arrays
+            { id: 'la1', category: 'line-arrays-section', name: 'Stage Pro Line Array', description: 'Cover large venues with precision and power.', price: 'GHS 15,000', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Line+Array+Speaker' },
+            // Mixers (Digital & Analog)
+            { id: 'mix1', category: 'mixers-section', name: 'Audio Maestro Mixer', description: 'The command center for your sound.', price: 'GHS 6,500', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Audio+Mixer' },
+        ];
+        
+        // Map of Category IDs to user-friendly names for the dropdown
+        const categoryMap = [
+            { id: 'lead-guitars-section', name: 'Lead Guitars' },
+            { id: 'bass-guitars-section', name: 'Bass Guitars' },
+            { id: 'keyboards-section', name: 'Keyboards' },
+            { id: 'drums-section', name: 'Drums' },
+            { id: 'combos-section', name: 'Combos' },
+            { id: 'amplifiers-section', name: 'Amplifiers' },
+            { id: 'monitors-section', name: 'Monitors (Active & Passive)' },
+            { id: 'line-arrays-section', name: 'Line Arrays' },
+            { id: 'mixers-section', name: 'Mixers (Digital & Analog)' },
+        ];
+
+
+        // 2. RENDERING FUNCTION: Generates the HTML for a single product card.
+        function generateProductCard(product) {
+            // Uses the product.imageURL property directly
+            const imageUrl = product.imageURL;
+            
+            return `
+                <div id="product-${product.id}" class="bg-gray-900 rounded-2xl p-6 shadow-xl transition-transform duration-300 hover-lift product-card fade-in">
+                    <img src="${imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Error'" alt="${product.name}" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h4 class="text-2xl font-bold text-white mb-2 product-name">${product.name}</h4>
+                    <p class="text-gray-300 mb-4 product-description">${product.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-bold gold-gradient">${product.price}</span>
+                        <button class="bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full hover:bg-white hover:text-black transition-colors duration-300">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 3. MAIN SHOP RENDERER: Iterates through the data and injects cards into the correct category.
+        function renderProducts() {
+            // 1. Group products by category ID
+            const groupedProducts = productData.reduce((acc, product) => {
+                if (!acc[product.category]) {
+                    acc[product.category] = [];
+                }
+                acc[product.category].push(product);
+                return acc;
+            }, {});
+
+            // 2. Iterate through groups and render
+            document.querySelectorAll('.product-group > .grid').forEach(container => {
+                container.innerHTML = ''; // Clear existing content
+            });
+
+            for (const categoryId in groupedProducts) {
+                // Find the specific grid container within the category section
+                const categoryElement = document.querySelector(`#${categoryId} > .grid`);
+                if (categoryElement) {
+                    let htmlContent = '';
+                    groupedProducts[categoryId].forEach(product => {
+                        htmlContent += generateProductCard(product);
+                    });
+                    // Insert all generated cards into the container
+                    categoryElement.innerHTML = htmlContent;
+                }
+            }
+        }
+        
+        // 4. FORM LOGIC: Populates the category dropdown on the admin page
+        function populateCategoryDropdown() {
+            const dropdown = document.getElementById('product-category');
+            if (!dropdown) return;
+
+            categoryMap.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                dropdown.appendChild(option);
+            });
+        }
+        
+        // 5. FORM LOGIC: Handles the submission of the new product form
+        function handleAddProduct(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('product-entry-form');
+            const messageBox = document.getElementById('product-form-message');
+            
+            // Collect data from form inputs
+            const newProduct = {
+                id: document.getElementById('product-id').value.trim(),
+                name: document.getElementById('product-name').value.trim(),
+                category: document.getElementById('product-category').value,
+                price: document.getElementById('product-price').value.trim(),
+                description: document.getElementById('product-description').value.trim(),
+                // UPDATED: Now collects the full URL from the new input field
+                imageURL: document.getElementById('product-image-url').value.trim(), 
+            };
+
+            // Basic validation: Check for ID uniqueness
+            const isIdDuplicate = productData.some(p => p.id === newProduct.id);
+            if (isIdDuplicate) {
+                messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-red-800 text-red-300';
+                messageBox.textContent = `Error: Product ID "${newProduct.id}" already exists. Please choose a unique ID.`;
+                setTimeout(() => messageBox.className = 'mt-6 text-center hidden p-3 rounded-lg font-medium', 5000);
+                return;
+            }
+
+            // Add new product to the data array
+            productData.push(newProduct);
+
+            // Re-render the shop page to display the new item
+            renderProducts();
+
+            // Provide success feedback
+            messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-green-800 text-green-300';
+            messageBox.textContent = `Success! Product "${newProduct.name}" added to inventory.`;
+
+            // Clear form and hide message after a few seconds
+            form.reset();
+            setTimeout(() => messageBox.className = 'mt-6 text-center hidden p-3 rounded-lg font-medium', 5000);
+        }
+        // --- EFFICIENT PRODUCT MANAGEMENT END ---
+
+
+        function showPage(pageId, navLink) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Update active navigation link, skip if no navLink (e.g., from Admin link in footer)
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-link');
+            });
+            if (navLink) {
+                 navLink.classList.add('active-link');
+            }
+            
+            // If we switch to the shop page, re-render to ensure new products are shown
+            if (pageId === 'shop-page') {
+                renderProducts();
+            }
+
+            // Scroll to the top of the new page content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); 
+            
+            const form = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            
+            formMessage.classList.remove('hidden');
+            formMessage.innerHTML = `<span class="text-green-400">Thank you for your message! We will get back to you shortly.</span>`;
+            
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 4000);
+
+            form.reset();
+        }
+
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('carousel');
+            const scrollAmount = 300; // Adjust based on item width
+            carousel.scrollLeft += direction * scrollAmount;
+        }
+
+        function handleCategoryScroll(event) {
+            event.preventDefault();
+            const targetId = event.target.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Calculate the position to scroll to, factoring in the fixed header offset
+                const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - HEADER_OFFSET;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+        
+        // Initial page load and product rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            // Default to home page
+            showPage('home-page', document.querySelector('.nav-link'));
+
+            // Populate the dropdown list with category options for the admin form
+            populateCategoryDropdown();
+            
+            // Initial call to render products
+            renderProducts();
+
+            // Attach scroll handler to category links after DOM is loaded
+            document.querySelectorAll('.category-link').forEach(link => {
+                link.addEventListener('click', handleCategoryScroll);
+            });
+        });
+    </script>
+</body>
+</html>
