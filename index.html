@@ -70,6 +70,10 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Modal transition class setup */
+        #modal-content-container {
+            transition: all 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -141,56 +145,83 @@
                 <div id="carousel" class="flex overflow-x-auto no-scrollbar space-x-6 pb-4 scroll-smooth">
                     <!-- Carousel Item 1 -->
                     <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
-                        <img src="https://kraftmusic.com/cdn/shop/files/YAM-MONTAGEM8X_reartopleft.jpg?v=1696873027&width=3000" alt="Yamaha Montage" class="w-full h-48 object-cover rounded-xl mb-4">
-                        <h4 class="text-xl font-bold text-white mb-2">Yamaha Montage M8x</h4>
-                        <p class="text-sm text-gray-300 mb-4">The centerpiece of any stage, premium voices and professional feel.</p>
-                        <div class="flex items-center justify-between">
+                        <img src="https://kraftmusic.com/cdn/shop/files/YAM-MONTAGEM8X_reartopleft.jpg?v=1696873027&width=3000" alt="Yamaha Montage" class="w-full h-64 object-cover rounded-xl mb-4">
+                        <h4 class="text-lg font-bold text-white mb-4">Yamaha Montage M8x</h4>
+                        <div class="flex items-center justify-between mt-4">
                             <span class="text-xl font-bold gold-gradient">GHS 60,000</span>
-                            <!-- Updated button to WhatsApp link (Shopping Cart Icon) -->
-                            <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Yamaha%20Montage%20M8x%20listed%20on%20your%20showroom." target="_blank" 
-                                title="Message us about this product on WhatsApp"
-                                class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
-                                <!-- Shopping Cart Icon SVG -->
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
-                            </a>
+                            <div class="flex space-x-2">
+                                <!-- Quick Preview Button (Hardcoded Data) -->
+                                <button onclick='showProductPreview({"id":"hm1","name":"Yamaha Montage M8x","category":"keyboards-section","price":"GHS 60,000","description":"The ultimate flagship synthesizer, combining cutting-edge motion control synthesis with stunning sound quality and advanced performance features. The 88-key weighted action provides an authentic piano feel.","imageURL":"https://kraftmusic.com/cdn/shop/files/YAM-MONTAGEM8X_reartopleft.jpg?v=1696873027&width=3000"})'
+                                        title="Quick Preview"
+                                        class="p-3 rounded-full bg-gray-700 text-white hover:bg-yellow-600 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </button>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Yamaha%20Montage%20M8x%20listed%20on%20your%20showroom." target="_blank" 
+                                    title="Message us about this product on WhatsApp"
+                                    class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- Carousel Item 2 -->
                     <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
-                        <img src="https://www.sweelee.com.sg/cdn/shop/products/N10-10641_1563521017601_1200x1200.jpg?v=1569334145" alt="Nord Stage 4" class="w-full h-48 object-cover rounded-xl mb-4">
-                        <h4 class="text-xl font-bold text-white mb-2">Nord Stage 4</h4>
-                        <p class="text-sm text-gray-300 mb-4">A timeless blend of tone, aesthetics anf function.</p>
-                        <div class="flex items-center justify-between">
+                        <img src="https://www.sweelee.com.sg/cdn/shop/products/N10-10641_1563521017601_1200x1200.jpg?v=1569334145" alt="Nord Stage 4" class="w-full h-64 object-cover rounded-xl mb-4">
+                        <h4 class="text-lg font-bold text-white mb-4">Nord Stage 4</h4>
+                        <div class="flex items-center justify-between mt-4">
                             <span class="text-xl font-bold gold-gradient">GHS 75,000</span>
-                            <!-- Updated button to WhatsApp link (Shopping Cart Icon) -->
-                            <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Nord%20Stage%204%20listed%20on%20your%20showroom." target="_blank" 
-                                title="Message us about this product on WhatsApp"
-                                class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
-                                <!-- Shopping Cart Icon SVG -->
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
-                            </a>
+                            <div class="flex space-x-2">
+                                <!-- Quick Preview Button (Hardcoded Data) -->
+                                <button onclick='showProductPreview({"id":"hm2","name":"Nord Stage 4","category":"keyboards-section","price":"GHS 75,000","description":"The iconic stage keyboard with enhanced layers, powerful effects, and a new panel design. Famous for its piano, organ, and synth sections, it's a touring professional's first choice.","imageURL":"https://www.sweelee.com.sg/cdn/shop/products/N10-10641_1563521017601_1200x1200.jpg?v=1569334145"})'
+                                        title="Quick Preview"
+                                        class="p-3 rounded-full bg-gray-700 text-white hover:bg-yellow-600 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </button>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Nord%20Stage%204%20listed%20on%20your%20showroom." target="_blank" 
+                                    title="Message us about this product on WhatsApp"
+                                    class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- Carousel Item 3 -->
                     <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
-                        <img src="https://media.musicarts.com/is/image/MMGS7/L52976000003000-00-2000x2000.jpg" alt="Marcus Miller M2 5-string Bass Guitar" class="w-full h-48 object-cover rounded-xl mb-4">
-                        <h4 class="text-xl font-bold text-white mb-2">Marcus Miller M2</h4>
-                        <p class="text-sm text-gray-300 mb-4">Feel the rhythm with this powerful bass.</p>
-                        <div class="flex items-center justify-between">
+                        <img src="https://media.musicarts.com/is/image/MMGS7/L52976000003000-00-2000x2000.jpg" alt="Marcus Miller M2 5-string Bass Guitar" class="w-full h-64 object-cover rounded-xl mb-4">
+                        <h4 class="text-lg font-bold text-white mb-4">Marcus Miller M2</h4>
+                        <div class="flex items-center justify-between mt-4">
                             <span class="text-xl font-bold gold-gradient">GHS 15,000</span>
-                            <!-- Updated button to WhatsApp link (Shopping Cart Icon) -->
-                            <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Marcus%20Miller%20M2%20listed%20on%20your%20showroom." target="_blank" 
-                                title="Message us about this product on WhatsApp"
-                                class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
-                                <!-- Shopping Cart Icon SVG -->
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
-                            </a>
+                            <div class="flex space-x-2">
+                                <!-- Quick Preview Button (Hardcoded Data) -->
+                                <button onclick='showProductPreview({"id":"hm3","name":"Marcus Miller M2 5-string Bass Guitar","category":"bass-guitars-section","price":"GHS 15,000","description":"A high-quality 5-string electric bass, designed with the legendary Marcus Miller. Features an active/passive switch and a sleek, fast neck for modern bassists.","imageURL":"https://media.musicarts.com/is/image/MMGS7/L52976000003000-00-2000x2000.jpg"})'
+                                        title="Quick Preview"
+                                        class="p-3 rounded-full bg-gray-700 text-white hover:bg-yellow-600 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                </button>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/233541096002?text=I%20am%20interested%20in%20the%20Marcus%20Miller%20M2%20listed%20on%20your%20showroom." target="_blank" 
+                                    title="Message us about this product on WhatsApp"
+                                    class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,7 +314,7 @@
             </div>
         </section>
     </div>
-    
+
     <!-- ==================================== -->
     <!-- 4. ADMIN PRODUCT ENTRY PAGE CONTENT -->
     <!-- ==================================== -->
@@ -348,10 +379,34 @@
                 &copy; 2024 Senkufie Music. All rights reserved. 
                 <span class="mx-2 text-gray-600">|</span> 
                 <!-- Hidden Admin Link: Uncomment the line below to access the Admin page -->
-                <a href="#" class="text-yellow-600 hover:text-white transition-colors" onclick="showPage('admin-page', null)">Admin Login</a>
+                <!-- <a href="#" class="text-yellow-600 hover:text-white transition-colors" onclick="showPage('admin-page', null)">Admin Login</a> -->
             </p>
         </div>
     </footer>
+
+    <!-- ==================================== -->
+    <!-- PRODUCT QUICK PREVIEW MODAL -->
+    <!-- ==================================== -->
+    <div id="preview-modal" 
+         class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4" 
+         onclick="closeModal(event)">
+        
+        <div class="bg-gray-900 rounded-2xl p-6 md:p-10 max-w-4xl w-full shadow-2xl relative transform scale-95 opacity-0" 
+             id="modal-content-container" 
+             onclick="event.stopPropagation()">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-500 transition-colors z-10">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Modal Content Area -->
+            <div id="modal-content" class="text-white grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Content will be injected here by JS -->
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
 
     <script>
         // =================================================================
@@ -376,7 +431,6 @@
         const HEADER_OFFSET = 96; 
         
         // Map of Category IDs to user-friendly names 
-        // *** NEW: Added 'Others' Category ***
         const categoryMap = [
             { id: 'lead-guitars-section', name: 'Lead Guitars' },
             { id: 'bass-guitars-section', name: 'Bass Guitars' },
@@ -387,7 +441,7 @@
             { id: 'monitors-section', name: 'Monitors (Active & Passive)' },
             { id: 'line-arrays-section', name: 'Line Arrays' },
             { id: 'mixers-section', name: 'Mixers (Digital & Analog)' },
-            { id: 'others-section', name: 'Others' }, // The new category!
+            { id: 'others-section', name: 'Others' },
         ];
 
 
@@ -527,7 +581,7 @@
         }
 
         // =================================================================
-        // *** 4. RENDERING FUNCTIONS (UPDATED) ***
+        // *** 4. RENDERING FUNCTIONS (UPDATED FOR PREVIEW BUTTON) ***
         // =================================================================
 
         /**
@@ -539,24 +593,40 @@
             // Create the WhatsApp link with a pre-filled message
             const whatsappMessage = `I am interested in the ${product.name} (ID: ${product.id}) listed on your showroom. Can you tell me more about its availability?`;
             const whatsappLink = `https://wa.me/${CONTACT_NUMBER_GH_INTERNATIONAL}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // JSON stringify the product object for safe passing to the onclick function
+            const productJson = JSON.stringify(product).replace(/'/g, "\\'"); 
 
             return `
                 <div id="product-${product.id}" class="bg-gray-900 rounded-2xl p-6 shadow-xl transition-transform duration-300 hover-lift product-card fade-in">
-                    <img src="${imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Missing'" alt="${product.name}" class="w-full h-48 object-cover rounded-xl mb-4">
-                    <h4 class="text-2xl font-bold text-white mb-2 product-name">${product.name}</h4>
-                    <p class="text-gray-300 mb-4 product-description">${product.description}</p>
-                    <div class="flex items-center justify-between">
+                    <!-- Image Height increased to h-64 and name font size reduced to lg -->
+                    <img src="${imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Missing'" alt="${product.name}" class="w-full h-64 object-cover rounded-xl mb-4">
+                    <h4 class="text-xl font-bold text-white mb-2 product-name">${product.name}</h4>
+                    
+                    <div class="flex items-center justify-between mt-4">
                         <span class="text-2xl font-bold gold-gradient">${product.price}</span>
                         
-                        <!-- NEW: Shopping Cart Icon with WhatsApp Functionality -->
-                        <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" 
-                           title="Message us about this product on WhatsApp"
-                           class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
-                            <!-- Shopping Cart Icon SVG -->
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </a>
+                        <div class="flex space-x-2">
+                            <!-- Quick Preview Button (Eye Icon) -->
+                            <button onclick='showProductPreview(${productJson})'
+                                    title="Quick Preview"
+                                    class="p-3 rounded-full bg-gray-700 text-white hover:bg-yellow-600 transition-colors duration-300 hover-lift flex-shrink-0">
+                                <!-- Eye icon SVG -->
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                            </button>
+                            
+                            <!-- WhatsApp Button (Shopping Cart Icon) -->
+                            <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" 
+                               title="Message us about this product on WhatsApp"
+                               class="p-3 rounded-full bg-yellow-600 text-black hover:bg-yellow-500 transition-colors duration-300 hover-lift flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             `;
@@ -626,7 +696,89 @@
 
 
         // =================================================================
-        // *** 5. GLOBAL UTILITY FUNCTIONS ***
+        // *** 5. MODAL LOGIC ***
+        // =================================================================
+        
+        /**
+         * Displays the product details in a modal overlay.
+         * @param {Object} product - The product object to display.
+         */
+        function showProductPreview(product) {
+            const modal = document.getElementById('preview-modal');
+            const contentContainer = document.getElementById('modal-content');
+            const modalContentContainer = document.getElementById('modal-content-container');
+
+            // Generate Content HTML
+            const contentHtml = `
+                <div class="md:col-span-1">
+                    <img src="${product.imageURL}" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Missing'" 
+                        alt="${product.name}" 
+                        class="w-full h-auto max-h-96 object-contain rounded-xl shadow-lg">
+                </div>
+                <div class="md:col-span-1 space-y-4">
+                    <h2 class="text-4xl font-bold cinzel-font text-white">${product.name}</h2>
+                    <p class="text-gray-400 text-sm">Category: ${categoryMap.find(c => c.id === product.category)?.name || 'N/A'}</p>
+                    <p class="text-4xl font-black gold-gradient">${product.price}</p>
+                    
+                    <hr class="border-gray-700">
+                    <!-- Full product description shown here -->
+                    <p class="text-gray-300 leading-relaxed max-h-48 overflow-y-auto pr-2">${product.description}</p>
+                    <hr class="border-gray-700">
+
+                    <div class="flex flex-col space-y-4 pt-4">
+                        <!-- WhatsApp button with full details in the message -->
+                        <a href="https://wa.me/${CONTACT_NUMBER_GH_INTERNATIONAL}?text=${encodeURIComponent(`I am interested in the ${product.name} (ID: ${product.id}). Please contact me with more details.`)}" 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center justify-center w-full px-6 py-3 font-bold text-black bg-yellow-600 rounded-full shadow-lg hover:bg-yellow-500 transition-all duration-300 hover-lift">
+                           <!-- Shopping Cart Icon SVG -->
+                           <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Order via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            contentContainer.innerHTML = contentHtml;
+            
+            // Show Modal with transition effect
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Force reflow to ensure transitions run
+            void modalContentContainer.offsetWidth; 
+            setTimeout(() => {
+                modalContentContainer.classList.remove('scale-95', 'opacity-0');
+                modalContentContainer.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        /**
+         * Closes the modal overlay.
+         */
+        function closeModal(event = null) {
+            // Only close if the click was on the overlay itself or the close button, not the content
+            if (event && event.target.id !== 'preview-modal') {
+                return;
+            }
+
+            const modal = document.getElementById('preview-modal');
+            const modalContentContainer = document.getElementById('modal-content-container');
+            
+            // Start Close Transition
+            modalContentContainer.classList.remove('scale-100', 'opacity-100');
+            modalContentContainer.classList.add('scale-95', 'opacity-0');
+
+            // Hide Modal after transition finishes (300ms)
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                // Clear content for next use
+                document.getElementById('modal-content').innerHTML = ''; 
+            }, 300);
+        }
+
+        // =================================================================
+        // *** 6. GLOBAL UTILITY FUNCTIONS ***
         // =================================================================
 
         function showPage(pageId, navLink) {
