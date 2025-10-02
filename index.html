@@ -238,6 +238,22 @@
                             <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
                         </div>
                         <button type="submit" class="w-full px-6 py-3 font-bold text-black bg-yellow-600 rounded-full shadow-lg hover:bg-white hover:text-black transition-colors duration-300 hover-lift">Send Message</button>
+                    </form>
+                    <div id="contact-form-message" class="mt-6 text-center hidden p-3 rounded-lg font-medium"></div>
+                </div>
+                <!-- Contact Info -->
+                <div class="w-full lg:w-1/2 mt-12 lg:mt-0 space-y-8">
+                    <div class="bg-gray-900 rounded-2xl p-8 shadow-xl">
+                        <h4 class="text-2xl font-semibold text-yellow-500 mb-4">Our Store</h4>
+                        <p class="text-gray-400">Afariwaa Junction, Tema, Ghana</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-2xl p-8 shadow-xl">
+                        <h4 class="text-2xl font-semibold text-yellow-500 mb-4">Call Us</h4>
+                        <p class="text-gray-400">0541096002</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-2xl p-8 shadow-xl">
+                        <h4 class="text-2xl font-semibold text-yellow-500 mb-4">Email Us</h4>
+                        <p class="text-gray-400">info@senkufiemusic.com</p>
                     </div>
                 </div>
             </div>
@@ -316,7 +332,7 @@
     <script>
         // =================================================================
         // *** 1. SUPABASE INITIALIZATION ***
-        // NOTE: REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL CREDENTIALS
+        // NOTE: Credentials are now correctly embedded from user input.
         // =================================================================
         const SUPABASE_URL = 'https://zeqaggtkcqruhwstymjk.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplcWFnZ3RrY3FydWh3c3R5bWprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjg4MTYsImV4cCI6MjA3NDk0NDgxNn0.j6DNbFXTr1XB6rzeM2s0Wc6MRmZ4zaVPfaiVjUNC_fg';
@@ -370,6 +386,9 @@
                     throw new Error(error.message);
                 }
 
+                // Log the successful fetch to help confirm connection
+                console.log(`Supabase Connection Success: Fetched ${data.length} products.`);
+
                 // Update the global state with fetched data
                 productData = data || [];
                 renderProducts();
@@ -389,11 +408,13 @@
          * @param {Object} product - The product object to insert.
          */
         async function addProductToSupabase(product) {
+            // Note: Supabase is case-sensitive and expects 'imageURL' to match the database column.
             const { error } = await supabase
                 .from(TABLE_NAME)
                 .insert([product]);
 
             if (error) {
+                // Throw the error to be caught in handleAddProduct for better reporting
                 throw new Error(error.message);
             }
         }
@@ -459,12 +480,24 @@
                 // Clear form and hide message after a few seconds
                 form.reset();
             } catch (error) {
-                console.error("Supabase Write Error:", error);
+                // --- ENHANCED ERROR REPORTING ---
+                console.error("Supabase Write Error:", error.message);
+                
+                let userMessage = `Database Error: Could not save product. ⚠️ Check your Supabase RLS (Row Level Security) and table schema.`;
+                
+                if (error.message.includes('permission denied')) {
+                     userMessage = `SECURITY ERROR: Insert failed due to 'permission denied'. You must enable the INSERT policy on the 'products' table in Supabase RLS.`;
+                } else if (error.message.includes('violates not-null constraint')) {
+                     userMessage = `SCHEMA ERROR: A required field is empty or missing. Check your table's NOT NULL constraints.`;
+                } else if (error.message.includes('duplicate key value')) {
+                     userMessage = `ID ERROR: The unique Product ID already exists in the database.`;
+                }
+                
                 messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-red-800 text-red-300 block';
-                messageBox.textContent = `Database Error: Could not save product. Check console and table RLS.`;
+                messageBox.textContent = userMessage;
             }
 
-            setTimeout(() => messageBox.classList.add('hidden'), 5000);
+            setTimeout(() => messageBox.classList.add('hidden'), 10000); // Keep error visible longer
         }
 
         // =================================================================
@@ -575,8 +608,8 @@
             }
             
             // If we switch to the shop page, ensure we fetch the latest data
-            if (pageId === 'shop-page' && productData.length === 0) {
-                 // Only fetch if data is not already loaded or if a refresh is needed
+            if (pageId === 'shop-page' || pageId === 'admin-page') {
+                 // Fetch data on shop and admin page entry
                  fetchProducts(); 
             }
 
@@ -588,11 +621,13 @@
             event.preventDefault(); 
             
             const form = document.getElementById('contact-form');
-            const formMessage = document.getElementById('form-message');
+            // Corrected to target the dedicated contact message div
+            const formMessage = document.getElementById('contact-form-message'); 
             
             // Simple display message (no actual sending implemented)
             formMessage.classList.remove('hidden');
-            formMessage.innerHTML = `<span class="text-green-400">Thank you for your message! We will get back to you shortly.</span>`;
+            formMessage.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-green-800 text-green-300 block';
+            formMessage.textContent = `Thank you for your message! We will get back to you shortly.`;
             
             setTimeout(() => {
                 formMessage.classList.add('hidden');
