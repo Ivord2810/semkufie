@@ -6,6 +6,9 @@
     <title>Senkufie Music Showroom</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -54,6 +57,18 @@
         .no-scrollbar {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
+        }
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #FFD700; /* Gold */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -119,7 +134,7 @@
             </div>
         </section>
 
-        <!-- Featured Instruments Carousel -->
+        <!-- Featured Instruments Carousel (Using Hardcoded data for aesthetics) -->
         <section class="container mx-auto py-24 px-6 md:px-12 fade-in">
             <h2 class="text-5xl font-bold text-center cinzel-font gold-gradient mb-12">Featured Instruments</h2>
             <div class="relative">
@@ -154,26 +169,6 @@
                             <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
                         </div>
                     </div>
-                    <!-- Carousel Item 4 -->
-                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
-                        <img src="https://sweet-muzic.com/wp-content/uploads/2024/08/Export-717.jpg" alt="Pearl Export 5" class="w-full h-48 object-cover rounded-xl mb-4">
-                        <h4 class="text-xl font-bold text-white mb-2">Pearl Export 5</h4>
-                        <p class="text-sm text-gray-300 mb-4">Powerful drum kit for every professional taste and need.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold gold-gradient">GHS 18,000</span>
-                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
-                        </div>
-                    </div>
-                     <!-- Carousel Item 5 -->
-                    <div class="flex-none bg-gray-900 rounded-2xl p-6 shadow-xl w-72 hover-lift">
-                        <img src="https://m.media-amazon.com/images/I/61SaQs6k60L._UF1000,1000_QL80_.jpg" alt="Behringer x32" class="w-full h-48 object-cover rounded-xl mb-4">
-                        <h4 class="text-xl font-bold text-white mb-2">Behringer x32 </h4>
-                        <p class="text-sm text-gray-300 mb-4">The command center for your sound.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold gold-gradient">GHS 45,000</span>
-                            <button class="bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full text-sm hover:bg-white hover:text-black transition-colors duration-300">View</button>
-                        </div>
-                    </div>
                 </div>
                 <!-- Carousel Navigation -->
                 <button onclick="scrollCarousel(-1)" class="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-800 p-2 rounded-full text-yellow-500 shadow-xl opacity-75 hover:opacity-100 transition-opacity">
@@ -193,107 +188,28 @@
         <section class="container mx-auto py-16 px-6 md:px-12 fade-in">
             <h2 class="text-5xl font-bold text-center cinzel-font gold-gradient mb-12">Our Instruments</h2>
             
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="flex justify-center items-center py-20 hidden">
+                <div class="loader"></div>
+                <p class="ml-4 text-xl text-gray-400">Loading inventory from Supabase...</p>
+            </div>
+            
             <!-- TOP FILTER BAR: Categories Navigation Only -->
             <div class="bg-gray-900 rounded-2xl p-6 mb-12 shadow-2xl">
                 <!-- Category Navigation -->
                 <nav>
                     <h3 class="text-lg font-bold text-yellow-500 mb-2">Jump to Category</h3>
-                    <div class="flex overflow-x-auto no-scrollbar pb-2 space-x-3">
-                        <a href="#lead-guitars-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Lead Guitars</a>
-                        <a href="#bass-guitars-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Bass Guitars</a>
-                        <a href="#keyboards-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Keyboards</a>
-                        <a href="#drums-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Drums</a>
-                        <a href="#combos-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Combos</a>
-                        <a href="#amplifiers-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Amplifiers</a>
-                        <a href="#monitors-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Monitors</a>
-                        <a href="#line-arrays-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Line Arrays</a>
-                        <a href="#mixers-section" class="category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap" onclick="handleCategoryScroll(event)">Mixers</a>
+                    <div class="flex overflow-x-auto no-scrollbar pb-2 space-x-3" id="category-nav-links">
+                        <!-- Category links populated by JS -->
                     </div>
                 </nav>
             </div>
             
             <!-- Main Product Content Area (full width) -->
             <div id="product-list" class="w-full">
-
-                <!-- Lead Guitars -->
-                <div id="lead-guitars-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Lead Guitars</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Bass Guitars -->
-                <div id="bass-guitars-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Bass Guitars</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Keyboards -->
-                <div id="keyboards-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Keyboards</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Drums -->
-                <div id="drums-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Drums</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Combos -->
-                <div id="combos-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Combos</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Amplifiers -->
-                <div id="amplifiers-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Amplifiers</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Monitors -->
-                <div id="monitors-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Monitors (Active & Passive)</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Line Arrays -->
-                <div id="line-arrays-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Line Arrays</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
-                </div>
-
-                <!-- Mixers -->
-                <div id="mixers-section" class="mb-16 product-group pt-4 -mt-4">
-                    <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">Mixers (Digital & Analog)</h3>
-                    <!-- Product cards will be inserted here by JavaScript -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Content generated by renderProducts() -->
-                    </div>
+                <!-- Product groups will be dynamically generated and populated here -->
+                <div id="product-groups-container">
+                    <!-- Content generated by renderProducts() -->
                 </div>
             </div>
         </section>
@@ -322,33 +238,6 @@
                             <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required></textarea>
                         </div>
                         <button type="submit" class="w-full px-6 py-3 font-bold text-black bg-yellow-600 rounded-full shadow-lg hover:bg-white hover:text-black transition-colors duration-300 hover-lift">Send Message</button>
-                    </form>
-                    <div id="form-message" class="mt-4 text-center hidden"></div>
-                </div>
-                <!-- Contact Info -->
-                <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <span class="text-3xl text-yellow-500">&#x1F4CD;</span>
-                            <div>
-                                <h4 class="text-lg font-semibold text-white">Our Address</h4>
-                                <p class="text-gray-300">Afariwaa Junction, Tema</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <span class="text-3xl text-yellow-500">&#x260E;</span>
-                            <div>
-                                <h4 class="text-lg font-semibold text-white">Call Us</h4>
-                                <p class="text-gray-300">0541096002 / 0261333958</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <span class="text-3xl text-yellow-500">&#x2709;</span>
-                            <div>
-                                <h4 class="text-lg font-semibold text-white">Email Us</h4>
-                                <p class="text-gray-300">info@senkufiemusic.com</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -361,7 +250,7 @@
     <div id="admin-page" class="page-content">
         <section class="container mx-auto py-16 px-6 md:px-12 fade-in">
             <h2 class="text-5xl font-bold text-center cinzel-font text-red-500 mb-4">Admin Dashboard</h2>
-            <p class="text-center text-gray-400 mb-12">Product Inventory Management</p>
+            <p class="text-center text-gray-400 mb-12">Product Inventory Management (Data is saved to Supabase)</p>
             
             <div class="bg-gray-900 rounded-2xl p-8 shadow-2xl max-w-3xl mx-auto">
                 <h3 class="text-3xl font-semibold text-yellow-500 mb-6">Add New Product</h3>
@@ -381,22 +270,21 @@
                         <label for="product-category" class="block text-gray-300 font-semibold mb-1 text-sm">Category</label>
                         <select id="product-category" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                             <option value="" disabled selected>Select a category...</option>
-                            <!-- Options populated by JS -->
                         </select>
                     </div>
                     <div class="col-span-1">
-                        <label for="product-price" class="block text-gray-300 font-semibold mb-1 text-sm">Price (e.g., $1,299 or GHS 5,000)</label>
+                        <label for="product-price" class="block text-gray-300 font-semibold mb-1 text-sm">Price (e.g., GHS 5,000)</label>
                         <input type="text" id="product-price" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                     </div>
 
-                    <!-- Row 3: Description and Image URL (Updated) -->
+                    <!-- Row 3: Description and Image URL -->
                     <div class="col-span-full">
                         <label for="product-description" class="block text-gray-300 font-semibold mb-1 text-sm">Description</label>
                         <textarea id="product-description" rows="3" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
                     </div>
                     <div class="col-span-full">
                         <label for="product-image-url" class="block text-gray-300 font-semibold mb-1 text-sm">Image Source Link (URL)</label>
-                        <input type="url" id="product-image-url" placeholder="https://example.com/guitar-image.jpg" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <input type="url" id="product-image-url" placeholder="https://placehold.co/600x400/333/FFD700?text=Product+Image" required class="w-full px-3 py-3 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                     </div>
                     
                     <!-- Submit Button -->
@@ -426,41 +314,28 @@
     </footer>
 
     <script>
-        /* ==================================== */
-        /* JAVASCRIPT LOGIC (Normally in script.js) */
-        /* ==================================== */
+        // =================================================================
+        // *** 1. SUPABASE INITIALIZATION ***
+        // NOTE: REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL CREDENTIALS
+        // =================================================================
+        const SUPABASE_URL = 'https://zeqaggtkcqruhwstymjk.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplcWFnZ3RrY3FydWh3c3R5bWprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjg4MTYsImV4cCI6MjA3NDk0NDgxNn0.j6DNbFXTr1XB6rzeM2s0Wc6MRmZ4zaVPfaiVjUNC_fg';
+        const TABLE_NAME = 'products';
 
-        // Offset to account for the fixed header height (80px + padding). 
-        const HEADER_OFFSET = 96; 
-
-        // --- EFFICIENT PRODUCT MANAGEMENT START ---
-
-        // 1. DATA DEFINITION: Central array holding all product objects.
-        // NOTE: 'imagePlaceholder' has been updated to 'imageURL' to store the direct link.
-        let productData = [
-            // Lead Guitars
-            { id: 'lg1', category: 'lead-guitars-section', name: 'Majestic V Electric', description: 'A timeless blend of tone and aesthetics.', price: 'GHS 5,200', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Electric+Guitar' },
-            { id: 'lg2', category: 'lead-guitars-section', name: 'Acoustic Dreamer', description: 'Rich, resonant sounds for the soulful performer.', price: 'GHS 3,850', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Acoustic+Guitar' },
-            // Bass Guitars
-            { id: 'bg1', category: 'bass-guitars-section', name: 'Rumble Bass V', description: 'Feel the rhythm with this powerful bass.', price: 'GHS 4,100', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Bass+Guitar' },
-            // Keyboards
-            { id: 'kb1', category: 'keyboards-section', name: 'Grand Maestro', description: 'The centerpiece of any stage, crafted for perfection.', price: 'GHS 12,000', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Grand+Piano' },
-            { id: 'kb2', category: 'keyboards-section', name: 'Starlight Synthesizer', description: 'Endless soundscapes at your fingertips.', price: 'GHS 8,500', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Digital+Keyboard' },
-            // Drums
-            { id: 'dr1', category: 'drums-section', name: 'The Rhythmist Kit', description: 'A powerful acoustic kit for any genre.', price: 'GHS 7,800', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Acoustic+Drum+Set' },
-            // Combos (Amplifier & Cabinet combos)
-            { id: 'cb1', category: 'combos-section', name: 'Classic Combo Amp', description: 'All-in-one powerful and portable amplifier.', price: 'GHS 2,650', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Guitar+Amp+Combo' },
-            // Amplifiers (Heads & Cabinets)
-            { id: 'amp1', category: 'amplifiers-section', name: 'The Sonic Titan', description: 'Unleash powerful tone with this head amplifier.', price: 'GHS 5,100', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Head+Amplifier' },
-            // Monitors (Studio Monitors/Wedges)
-            { id: 'mon1', category: 'monitors-section', name: 'Clarity Studio Monitors', description: 'Hear every detail with these professional studio monitors.', price: 'GHS 1,950', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Studio+Monitors' },
-            // Line Arrays
-            { id: 'la1', category: 'line-arrays-section', name: 'Stage Pro Line Array', description: 'Cover large venues with precision and power.', price: 'GHS 15,000', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Line+Array+Speaker' },
-            // Mixers (Digital & Analog)
-            { id: 'mix1', category: 'mixers-section', name: 'Audio Maestro Mixer', description: 'The command center for your sound.', price: 'GHS 6,500', imageURL: 'https://placehold.co/600x400/333/FFD700?text=Audio+Mixer' },
-        ];
+        if (SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY_HERE') {
+            console.error("FATAL ERROR: Please update SUPABASE_URL and SUPABASE_ANON_KEY with your credentials to enable database persistence.");
+        }
         
-        // Map of Category IDs to user-friendly names for the dropdown
+        // Initialize the Supabase Client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Global variable to hold the fetched product data
+        let productData = [];
+        
+        // Offset to account for the fixed header height
+        const HEADER_OFFSET = 96; 
+        
+        // Map of Category IDs to user-friendly names 
         const categoryMap = [
             { id: 'lead-guitars-section', name: 'Lead Guitars' },
             { id: 'bass-guitars-section', name: 'Bass Guitars' },
@@ -474,55 +349,62 @@
         ];
 
 
-        // 2. RENDERING FUNCTION: Generates the HTML for a single product card.
-        function generateProductCard(product) {
-            // Uses the product.imageURL property directly
-            const imageUrl = product.imageURL;
-            
-            return `
-                <div id="product-${product.id}" class="bg-gray-900 rounded-2xl p-6 shadow-xl transition-transform duration-300 hover-lift product-card fade-in">
-                    <img src="${imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Error'" alt="${product.name}" class="w-full h-48 object-cover rounded-xl mb-4">
-                    <h4 class="text-2xl font-bold text-white mb-2 product-name">${product.name}</h4>
-                    <p class="text-gray-300 mb-4 product-description">${product.description}</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-2xl font-bold gold-gradient">${product.price}</span>
-                        <button class="bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full hover:bg-white hover:text-black transition-colors duration-300">Add to Cart</button>
-                    </div>
-                </div>
-            `;
+        // =================================================================
+        // *** 2. SUPABASE DATA OPERATIONS ***
+        // =================================================================
+
+        /**
+         * Fetches all products from the Supabase 'products' table.
+         * Updates the global productData array and re-renders the shop.
+         */
+        async function fetchProducts() {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.classList.remove('hidden');
+
+            try {
+                const { data, error } = await supabase
+                    .from(TABLE_NAME)
+                    .select('*');
+
+                if (error) {
+                    throw new Error(error.message);
+                }
+
+                // Update the global state with fetched data
+                productData = data || [];
+                renderProducts();
+                
+            } catch (error) {
+                console.error("Error fetching products from Supabase:", error.message);
+                // Fallback or error message for user
+                const listContainer = document.getElementById('product-groups-container');
+                listContainer.innerHTML = '<p class="text-red-400 text-center text-lg mt-10">Could not load inventory. Check console for Supabase errors and credentials.</p>';
+            } finally {
+                loadingIndicator.classList.add('hidden');
+            }
         }
 
-        // 3. MAIN SHOP RENDERER: Iterates through the data and injects cards into the correct category.
-        function renderProducts() {
-            // 1. Group products by category ID
-            const groupedProducts = productData.reduce((acc, product) => {
-                if (!acc[product.category]) {
-                    acc[product.category] = [];
-                }
-                acc[product.category].push(product);
-                return acc;
-            }, {});
+        /**
+         * Adds a new product object to the Supabase 'products' table.
+         * @param {Object} product - The product object to insert.
+         */
+        async function addProductToSupabase(product) {
+            const { error } = await supabase
+                .from(TABLE_NAME)
+                .insert([product]);
 
-            // 2. Iterate through groups and render
-            document.querySelectorAll('.product-group > .grid').forEach(container => {
-                container.innerHTML = ''; // Clear existing content
-            });
-
-            for (const categoryId in groupedProducts) {
-                // Find the specific grid container within the category section
-                const categoryElement = document.querySelector(`#${categoryId} > .grid`);
-                if (categoryElement) {
-                    let htmlContent = '';
-                    groupedProducts[categoryId].forEach(product => {
-                        htmlContent += generateProductCard(product);
-                    });
-                    // Insert all generated cards into the container
-                    categoryElement.innerHTML = htmlContent;
-                }
+            if (error) {
+                throw new Error(error.message);
             }
         }
         
-        // 4. FORM LOGIC: Populates the category dropdown on the admin page
+        // =================================================================
+        // *** 3. ADMIN FORM LOGIC ***
+        // =================================================================
+
+        /**
+         * Populates the category dropdown on the admin page.
+         */
         function populateCategoryDropdown() {
             const dropdown = document.getElementById('product-category');
             if (!dropdown) return;
@@ -535,8 +417,10 @@
             });
         }
         
-        // 5. FORM LOGIC: Handles the submission of the new product form
-        function handleAddProduct(event) {
+        /**
+         * Handles the submission of the new product form, saves to Supabase, and refreshes the list.
+         */
+        async function handleAddProduct(event) {
             event.preventDefault();
 
             const form = document.getElementById('product-entry-form');
@@ -549,35 +433,129 @@
                 category: document.getElementById('product-category').value,
                 price: document.getElementById('product-price').value.trim(),
                 description: document.getElementById('product-description').value.trim(),
-                // UPDATED: Now collects the full URL from the new input field
                 imageURL: document.getElementById('product-image-url').value.trim(), 
             };
 
-            // Basic validation: Check for ID uniqueness
+            // Basic validation: Check for ID uniqueness (local check)
             const isIdDuplicate = productData.some(p => p.id === newProduct.id);
             if (isIdDuplicate) {
-                messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-red-800 text-red-300';
+                messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-red-800 text-red-300 block';
                 messageBox.textContent = `Error: Product ID "${newProduct.id}" already exists. Please choose a unique ID.`;
-                setTimeout(() => messageBox.className = 'mt-6 text-center hidden p-3 rounded-lg font-medium', 5000);
+                setTimeout(() => messageBox.classList.add('hidden'), 5000);
                 return;
             }
 
-            // Add new product to the data array
-            productData.push(newProduct);
+            try {
+                // Add new product to Supabase
+                await addProductToSupabase(newProduct);
 
-            // Re-render the shop page to display the new item
-            renderProducts();
+                // Fetch and re-render the shop page to display the new item
+                await fetchProducts(); 
 
-            // Provide success feedback
-            messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-green-800 text-green-300';
-            messageBox.textContent = `Success! Product "${newProduct.name}" added to inventory.`;
+                // Provide success feedback
+                messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-green-800 text-green-300 block';
+                messageBox.textContent = `Success! Product "${newProduct.name}" added to inventory and saved to Supabase.`;
 
-            // Clear form and hide message after a few seconds
-            form.reset();
-            setTimeout(() => messageBox.className = 'mt-6 text-center hidden p-3 rounded-lg font-medium', 5000);
+                // Clear form and hide message after a few seconds
+                form.reset();
+            } catch (error) {
+                console.error("Supabase Write Error:", error);
+                messageBox.className = 'mt-6 text-center p-3 rounded-lg font-medium bg-red-800 text-red-300 block';
+                messageBox.textContent = `Database Error: Could not save product. Check console and table RLS.`;
+            }
+
+            setTimeout(() => messageBox.classList.add('hidden'), 5000);
         }
-        // --- EFFICIENT PRODUCT MANAGEMENT END ---
 
+        // =================================================================
+        // *** 4. RENDERING FUNCTIONS ***
+        // =================================================================
+
+        /**
+         * Generates the HTML string for a single product card.
+         */
+        function generateProductCard(product) {
+            const imageUrl = product.imageURL;
+            
+            return `
+                <div id="product-${product.id}" class="bg-gray-900 rounded-2xl p-6 shadow-xl transition-transform duration-300 hover-lift product-card fade-in">
+                    <img src="${imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/333/666?text=Image+Missing'" alt="${product.name}" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h4 class="text-2xl font-bold text-white mb-2 product-name">${product.name}</h4>
+                    <p class="text-gray-300 mb-4 product-description">${product.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-bold gold-gradient">${product.price}</span>
+                        <button class="bg-yellow-600 text-black font-semibold py-2 px-6 rounded-full hover:bg-white hover:text-black transition-colors duration-300">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Iterates through the global productData and injects cards into the correct category sections.
+         */
+        function renderProducts() {
+            const container = document.getElementById('product-groups-container');
+            if (!container) return;
+            
+            container.innerHTML = ''; // Clear previous groups
+
+            // 1. Group products by category ID
+            const groupedProducts = productData.reduce((acc, product) => {
+                if (!acc[product.category]) {
+                    acc[product.category] = [];
+                }
+                acc[product.category].push(product);
+                return acc;
+            }, {});
+
+            // 2. Iterate through defined categories and render the group HTML
+            categoryMap.forEach(category => {
+                const products = groupedProducts[category.id];
+                if (products && products.length > 0) {
+                    let productsHtml = '';
+                    products.forEach(product => {
+                        productsHtml += generateProductCard(product);
+                    });
+
+                    const groupHtml = `
+                        <div id="${category.id}" class="mb-16 product-group pt-4 -mt-4">
+                            <h3 class="text-4xl font-semibold cinzel-font text-yellow-500 mb-8">${category.name}</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                ${productsHtml}
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += groupHtml;
+                }
+            });
+            
+            // Re-generate category nav links based on rendered groups
+            generateCategoryNav();
+        }
+
+        /**
+         * Generates and inserts category navigation links dynamically.
+         */
+        function generateCategoryNav() {
+             const navContainer = document.getElementById('category-nav-links');
+             navContainer.innerHTML = ''; // Clear existing
+             
+             categoryMap.forEach(category => {
+                 if (document.getElementById(category.id)) {
+                     const link = document.createElement('a');
+                     link.href = `#${category.id}`;
+                     link.className = 'category-link flex-none px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-gray-800 hover:bg-yellow-600 hover:text-black transition-colors whitespace-nowrap';
+                     link.textContent = category.name;
+                     link.onclick = handleCategoryScroll;
+                     navContainer.appendChild(link);
+                 }
+             });
+        }
+
+
+        // =================================================================
+        // *** 5. GLOBAL UTILITY FUNCTIONS ***
+        // =================================================================
 
         function showPage(pageId, navLink) {
             // Hide all pages
@@ -588,7 +566,7 @@
             // Show the selected page
             document.getElementById(pageId).style.display = 'block';
             
-            // Update active navigation link, skip if no navLink (e.g., from Admin link in footer)
+            // Update active navigation link, skip if no navLink 
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active-link');
             });
@@ -596,9 +574,10 @@
                  navLink.classList.add('active-link');
             }
             
-            // If we switch to the shop page, re-render to ensure new products are shown
-            if (pageId === 'shop-page') {
-                renderProducts();
+            // If we switch to the shop page, ensure we fetch the latest data
+            if (pageId === 'shop-page' && productData.length === 0) {
+                 // Only fetch if data is not already loaded or if a refresh is needed
+                 fetchProducts(); 
             }
 
             // Scroll to the top of the new page content
@@ -611,6 +590,7 @@
             const form = document.getElementById('contact-form');
             const formMessage = document.getElementById('form-message');
             
+            // Simple display message (no actual sending implemented)
             formMessage.classList.remove('hidden');
             formMessage.innerHTML = `<span class="text-green-400">Thank you for your message! We will get back to you shortly.</span>`;
             
@@ -623,7 +603,7 @@
 
         function scrollCarousel(direction) {
             const carousel = document.getElementById('carousel');
-            const scrollAmount = 300; // Adjust based on item width
+            const scrollAmount = 300; 
             carousel.scrollLeft += direction * scrollAmount;
         }
 
@@ -644,7 +624,7 @@
             }
         }
         
-        // Initial page load and product rendering
+        // Initial page load and setup
         document.addEventListener('DOMContentLoaded', () => {
             // Default to home page
             showPage('home-page', document.querySelector('.nav-link'));
@@ -652,13 +632,8 @@
             // Populate the dropdown list with category options for the admin form
             populateCategoryDropdown();
             
-            // Initial call to render products
-            renderProducts();
-
-            // Attach scroll handler to category links after DOM is loaded
-            document.querySelectorAll('.category-link').forEach(link => {
-                link.addEventListener('click', handleCategoryScroll);
-            });
+            // Fetch initial product data when the app starts
+            fetchProducts();
         });
     </script>
 </body>
