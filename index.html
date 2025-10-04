@@ -477,7 +477,7 @@
                 console.error("Error fetching products from Supabase:", error.message);
                 // Fallback or error message for user
                 const listContainer = document.getElementById('product-groups-container');
-                listContainer.innerHTML = '<p class="text-red-400 text-center text-lg mt-10">Could not load inventory. Check console for Supabase errors and credentials.</p>';
+                listContainer.innerHTML = '<p class="text-red-400 text-center text-lg mt-10">Sorry we could not load inventory. We are fixing it.</p>';
             } finally {
                 loadingIndicator.classList.add('hidden');
             }
@@ -591,7 +591,7 @@
             const imageUrl = product.imageURL;
             
             // Create the WhatsApp link with a pre-filled message
-            const whatsappMessage = `I am interested in the ${product.name} (ID: ${product.id}) listed on your showroom. Can you tell me more about its availability?`;
+            const whatsappMessage = `I am interested in the ${product.name} listed on your showroom. Can you tell me more about its availability?`;
             const whatsappLink = `https://wa.me/${CONTACT_NUMBER_GH_INTERNATIONAL}?text=${encodeURIComponent(whatsappMessage)}`;
             
             // JSON stringify the product object for safe passing to the onclick function
@@ -728,7 +728,7 @@
 
                     <div class="flex flex-col space-y-4 pt-4">
                         <!-- WhatsApp button with full details in the message -->
-                        <a href="https://wa.me/${CONTACT_NUMBER_GH_INTERNATIONAL}?text=${encodeURIComponent(`I am interested in the ${product.name} (ID: ${product.id}). Please contact me with more details.`)}" 
+                        <a href="https://wa.me/${CONTACT_NUMBER_GH_INTERNATIONAL}?text=${encodeURIComponent(`I am interested in the ${product.name}. Please contact me with more details.`)}" 
                            target="_blank" rel="noopener noreferrer" 
                            class="flex items-center justify-center w-full px-6 py-3 font-bold text-black bg-yellow-600 rounded-full shadow-lg hover:bg-yellow-500 transition-all duration-300 hover-lift">
                            <!-- Shopping Cart Icon SVG -->
